@@ -14,7 +14,7 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Fun
 ### Function Expression
 
 ```js
-//No Name
+//Not Named
 var name = function() {
    console.log('bar');
 };
@@ -25,7 +25,7 @@ name();
 or
 
 ```js
-//Named
+//Named "name2"
 var name = function name2() {
    console.log('bar');
 };
@@ -36,9 +36,9 @@ name();
 
 In a function expression the function `name` can be omited to create an anonymous function. A function expression can be used as an **IIFE** (Immediately Invoked Function Expression) which runs as soon as it is defined.
 
+<br/>
 
-
-**Not Hoisted**
+**Not Hoisted**<br/>
 Function expressions are not **hoisted** unlike function declerations. You cannot use/call a function expression before it is defined.
 
 ```js
@@ -49,9 +49,9 @@ var notHoisted = function() {
 };
 ```
 
+<br/>
 
-
-**Named function expression**
+**Named function expression**<br/>
 A function expression can have a name (optional), without an name it is refered to as a unnamed function expression, we can use the name as a reference, example: 
 
 ```js
@@ -65,9 +65,9 @@ var bar = function baz() {}
 bar.name // "baz"
 ```
 
+<br/>
 
-
-**Calling a Function Expression**
+**Calling a Function Expression**<br/>
 A function expression will always be called by the variable (var) it was declared on for example:
 
 ```js
@@ -80,9 +80,9 @@ bar(); // foo
 baz(); // Uncaught ReferenceError: baz is not defined
 ```
 
+<br/>
 
-
-**IFEE**
+**IFEE**<br/>
 A function expression can be used as an **IIFE** (Immediately Invoked Function Expression) which runs as soon as it is defined.
 
 ```js
@@ -91,9 +91,9 @@ A function expression can be used as an **IIFE** (Immediately Invoked Function E
 })();
 ```
 
+<br/>
 
-
-**Callback**
+**Callback**<br/>
 They are usually used as a callback:
 
 ```js
@@ -106,7 +106,7 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Ope
 
 
 
-
+<br/>
 
 
 
@@ -123,7 +123,7 @@ name();
 
 
 
-**Hoisted**
+**Hoisted** <br/>
 Function Declerations are hoisted, so you can call the fucntion before it is declared:
 
 ```js
@@ -134,9 +134,9 @@ function name() {
 };
 ```
 
+<br/>
 
-
-**Calling a Function Decleration**
+**Calling a Function Decleration** <br/>
 A function Decleration will always be called by the name specified after the **function** keyword ```function bar() {}```:
 
 ```js
@@ -154,7 +154,7 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Sta
 
 
 
-
+<br/>
 
 
 ### Callback function
@@ -163,10 +163,10 @@ More Info: https://developer.mozilla.org/en-US/docs/Glossary/Callback_function
 
 
 
+<br/>
 
 
-
-### Function constructor 
+### Function constructor
 
 More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function
 
