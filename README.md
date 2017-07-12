@@ -37,6 +37,8 @@ name();
 In a function expression the function `name` can be omited to create an anonymous function. A function expression can be used as an **IIFE** (Immediately Invoked Function Expression) which runs as soon as it is defined.
 
 <br/>
+<br/>
+<br/>
 
 **Not Hoisted**<br/>
 Function expressions are not **hoisted** unlike function declerations. You cannot use/call a function expression before it is defined.
@@ -49,6 +51,8 @@ var notHoisted = function() {
 };
 ```
 
+<br/>
+<br/>
 <br/>
 
 **Named function expression**<br/>
@@ -66,6 +70,8 @@ bar.name // "baz"
 ```
 
 <br/>
+<br/>
+<br/>
 
 **Calling a Function Expression**<br/>
 A function expression will always be called by the variable (var) it was declared on for example:
@@ -81,6 +87,8 @@ baz(); // Uncaught ReferenceError: baz is not defined
 ```
 
 <br/>
+<br/>
+<br/>
 
 **IFEE**<br/>
 A function expression can be used as an **IIFE** (Immediately Invoked Function Expression) which runs as soon as it is defined.
@@ -91,6 +99,8 @@ A function expression can be used as an **IIFE** (Immediately Invoked Function E
 })();
 ```
 
+<br/>
+<br/>
 <br/>
 
 **Callback**<br/>
@@ -106,6 +116,8 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Ope
 
 
 
+<br/>
+<br/>
 <br/>
 
 
@@ -135,6 +147,8 @@ function name() {
 ```
 
 <br/>
+<br/>
+<br/>
 
 **Calling a Function Decleration** <br/>
 A function Decleration will always be called by the name specified after the **function** keyword ```function bar() {}```:
@@ -155,6 +169,8 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Sta
 
 
 <br/>
+<br/>
+<br/>
 
 
 ### Callback function
@@ -163,6 +179,8 @@ More Info: https://developer.mozilla.org/en-US/docs/Glossary/Callback_function
 
 
 
+<br/>
+<br/>
 <br/>
 
 
