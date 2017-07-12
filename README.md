@@ -11,7 +11,7 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Fun
 
 
 
-###Function Expression
+### Function Expression
 
 ```js
 //No Name
@@ -110,7 +110,7 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Ope
 
 
 
-###Function Decleration
+### Function Decleration
 
 ```js
 function name() {
@@ -157,7 +157,7 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Sta
 
 
 
-###Callback function
+### Callback function
 
 More Info: https://developer.mozilla.org/en-US/docs/Glossary/Callback_function
 
@@ -166,7 +166,7 @@ More Info: https://developer.mozilla.org/en-US/docs/Glossary/Callback_function
 
 
 
-###Function constructor 
+### Function constructor 
 
 More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function
 
