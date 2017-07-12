@@ -175,6 +175,24 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Sta
 
 ### Callback function
 
+A Callback function, also known as a higher-order-function, is a function that is passed to another function ( called *otherFunction* just for this example) as a parameter, and the callback function is called/executed inside the *otherFunction*.
+
+An example of a callback function:
+
+```js
+var cars = ["Toyota", "BMW", "Porsche", "Ferari", "Mini", "Ford"];
+​
+cars.forEach(function (car, index){
+console.log(index + 1 + ". " + car); // 1. Toyota, 2. BMW, 3. Porsche, 4. Ferari, 5.Mini, 6.Ford
+});
+
+```
+Here we passed an anonymous to the forEach method (method is a function that is inside an object, that is owned by an object) as a parameter.
+
++
+
+More Info: http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/
+
 More Info: https://developer.mozilla.org/en-US/docs/Glossary/Callback_function
 
 
