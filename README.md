@@ -237,9 +237,5 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 
 
 
-
-
-
-
 # Book: Scope & Closures
 
