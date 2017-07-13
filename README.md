@@ -189,9 +189,36 @@ console.log(index + 1 + ". " + car); // 1. Toyota, 2. BMW, 3. Porsche, 4. Ferari
 });
 
 ```
-Here we passed an anonymous to the forEach method (method is a function that is inside an object, that is owned by an object) as a parameter.
+Here we passed an anonymous function ```function (car, index)``` to the forEach method (a *method* is a function that is inside an object / that is owned by an object) as a parameter.
 
-+
+Another example:
+
+```js
+// This function logs/prints an name parameter into the console eg:
+// greeting("Charlie"); // Hello Charlie
+
+function greeting(name) {
+  console.log('Hello ' + name);
+}
+
+//This function accepts a function as a parameter which it calls (callback).
+//When the processUserInput function is run/called the user is prompted
+//to enter their name in the prompt box, and that name is passed as a
+//value to the *name* variable.
+//The name variable is passed to the *callback* function and the *callback*
+//function is executed logging/printing to the console *"Hello Charlie"*
+
+
+function processUserInput(callback) {
+  var name = prompt('Please enter your name.');
+  callback(name);
+}
+
+//This is how the *processUserInput* function is called, with the *greeting* 
+//function as the parameter.
+
+processUserInput(greeting);
+```
 
 More Info: http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/
 
