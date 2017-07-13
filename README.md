@@ -104,13 +104,15 @@ A function expression can be used as an **IIFE** (Immediately Invoked Function E
 <br/>
 
 **Callback**<br/>
-They are usually used as a callback:
+They are usually used as a callback, the ```function(event)``` in this example:
 
 ```js
 button.addEventListener('click', function(event) {
     console.log('button is clicked!')
 })
 ```
+
+
 
 More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function
 
