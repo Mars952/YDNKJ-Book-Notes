@@ -1,6 +1,9 @@
 # You Don't Know JS Book Series Notes
 The Series: https://github.com/getify/You-Dont-Know-JS
 
+Good Reference for Javascript and Programing Jargon: https://www.computerhope.com/jargon/jc.htm
+
+
 # Book: Up & Going
 
 
@@ -175,7 +178,9 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Sta
 <br/>
 
 
-### Callback function
+### Callback function or just "Callback"
+
+A "callback" is a function, procedure, or method, which is passed as an argument to another function.
 
 A Callback function, also known as a higher-order-function, is a function that is passed to another function ( called *otherFunction* just for this example) as a parameter, and the callback function is called/executed inside the *otherFunction*.
 
@@ -224,12 +229,35 @@ More Info: http://javascriptissexy.com/understand-javascript-callback-functions-
 
 More Info: https://developer.mozilla.org/en-US/docs/Glossary/Callback_function
 
+More info: https://www.computerhope.com/jargon/c/callback.htm
 
 
 <br/>
 <br/>
 <br/>
 
+### First-class Function / First-class Object
+
+This means that javascript functions are just a special type of object that can do all the things that regular objects can do.
+
+Basically, it means that you can do with functions everything that you can do with all other elements in the programming language. 
+
+So, in the case of JavaScript, it means that everything you can do with an Integer, a String, an Array or any other kind of Object, you can also do with functions. 
+
+(**First-class values / first calss objects** - In computer programming, a **first-class object**, also known as a **first-class citizen** or a **first-class value**, is a language entity — a number, a function, or a variable, for instance — that can be operated on in the same way as any other entity in the language.
+
+More Info: https://www.computerhope.com/jargon/f/firstclass-object.htm )
+
+More info : http://helephant.com/2008/08/19/functions-are-first-class-objects-in-javascript/
+
+<br/>
+<br/>
+
+
+
+<br/>
+<br/>
+<br/>
 
 ### Function constructor
 
