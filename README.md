@@ -275,3 +275,14 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 
 # Book: Scope & Closures
 
+### Scope
+
+In JavaScript, scope is the set of variables, objects, and functions you have access to.
+
+Javascript has function scope, meaning each function has its own scope. 
+
+the **global** scope is the scope that contains all your code.
+
+In Javascript functions have private scope meaning other functions variables etc... cannot access variables, functions and objects from outside of the function they are contained in, unless there is **Closuer** in the case of closure the closure provides access to the scope of a function from outside the function.
+
+A function(fn2) within another function(fn1) can access its own scope(fn2) and its parent scope(fn1), and the global scope, while nothing in the globas scope has access to the scope of the parent function(fn1) or the child function(fn2), unless closure is present.
