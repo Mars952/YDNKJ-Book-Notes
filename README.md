@@ -1,7 +1,7 @@
 # You Don't Know JS Book Series Notes
 The Series: https://github.com/getify/You-Dont-Know-JS
 
-Good Reference for Javascript and Programing Jargon: https://www.computerhope.com/jargon/jc.htm
+Good **Reference** for Javascript and Programing Jargon: https://www.computerhope.com/jargon/jc.htm
 
 
 # Book: Up & Going
@@ -262,6 +262,14 @@ More info : http://helephant.com/2008/08/19/functions-are-first-class-objects-in
 ### Function constructor
 
 More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function
+
+<br/>
+<br/>
+<br/>
+
+## Other
+
+
 
 
 
