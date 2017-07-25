@@ -275,14 +275,32 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 
 # Book: Scope & Closures
 
-### Scope
+### Scope & Closure
 
 In JavaScript, scope is the set of variables, objects, and functions you have access to.
 
 Javascript has function scope, meaning each function has its own scope. 
 
-the **global** scope is the scope that contains all your code.
+The **global** scope is the scope that contains all your code.
 
-In Javascript functions have private scope meaning other functions variables etc... cannot access variables, functions and objects from outside of the function they are contained in, unless there is **Closuer** in the case of closure the closure provides access to the scope of a function from outside the function.
+In Javascript functions have private scope, meaning  functions, variables or objects cannot access the functions, variables or objects contained in another function if they are sitting int he same scope, unless there is **Closuer**, in the case of closure the closure provides access to the scope of a function from outside the function.
 
-A function(fn2) within another function(fn1) can access its own scope(fn2) and its parent scope(fn1), and the global scope, while nothing in the globas scope has access to the scope of the parent function(fn1) or the child function(fn2), unless closure is present.
+Example 1: If function 1 and function 2 both sit on the global scope, they cannot enter each others scope and read the containing functions, variables or objects, unless closure is present between the two functions.
+
+Example 2: If function 2 (fn2) sits inside function 1 (fn1) then fn2 can access the scope of fn1 because it sits inside the scope of fn1, but fn1 cannot access the scope of fn2, unless there is closure between fn1 and fn2. 
+
+Both fn1 and fn2 can access the global scope, because fn1 sits on the global scope and fn2 sits within fn1, but the global scope cannot access the scope of either of the 2 functions, unless there is closure between the global scope and the other 2 functions. 
+
+In other words scope access is only a one way process unless there is closure to allow access. We can think of Closure as a portal that allows access from a function or the global scope to another functions scope.
+
+
+  >>>>Closure>>>>>
+ ∧                v
+GS < fn1 < fn2 < fn3
+   >/    >/    >/
+   
+In this simple example, **fn3** can assess **fn2**, **fn2** can access **fn1** and **fn1** can asscee **GS** as illustrated by the (<) symbol, this also means that **fn3** can access **fn1** by flowing through the scope of **fn2** and it can access **GS** by flowing through the socpe of **fn2** then flowing through the scope of **fn1**, but it is not possible to go forwards as illustrated by the (>/) symbol.
+
+Also in this example we can see that **GS** has closure over **fn3** as illustrated by the (∧) (>>>>Closure>>>>>) (V) aymbols, as we can see it looks like a portal that skips over the functions **fn1**, **fn2** and accesses **fn3** directly,
+   
+   
