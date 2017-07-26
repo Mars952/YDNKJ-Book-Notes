@@ -269,13 +269,14 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 
 ## Other
 
-
-
+<br/>
+<br/>
+<br/>
 
 
 # Book: Scope & Closures
 
-### Scope & Closure
+### Scope
 
 In JavaScript, scope is the set of variables, objects, and functions you have access to.
 
@@ -283,24 +284,41 @@ Javascript has function scope, meaning each function has its own scope.
 
 The **global scope** is the scope that contains all your code.
 
-In Javascript functions have private scope, meaning  functions, variables or objects cannot access the functions, variables or objects contained in another function if they are sitting in the same scope, unless there is **Closure**, in the case of closure the closure provides access to the scope of a function from outside the function.
+In Javascript functions have private scope, meaning  functions, variables or objects cannot access the functions, variables or objects contained in another function if they are sitting in the same scope.
 
-Example 1: If function 1 and function 2 both sit on the global scope, they cannot enter each others scope and read the containing functions, variables or objects, unless closure is present between the two functions.
+Example 1: If function 1 and function 2 both sit on the global scope, they cannot enter each others scope and read the containing functions, variables or objects.
 
-Example 2: If function 2 (fn2) sits inside function 1 (fn1) then fn2 can access the scope of fn1 because it sits inside the scope of fn1, but fn1 cannot access the scope of fn2, unless there is closure between fn1 and fn2. 
+Example 2: If function 2 (fn2) sits inside function 1 (fn1) then fn2 can access the scope of fn1 because it sits inside the scope of fn1, but fn1 cannot access the scope of fn2. 
 
-Both fn1 and fn2 can access the global scope, because fn1 sits on the global scope and fn2 sits within fn1, but the global scope cannot access the scope of either of the 2 functions, unless there is closure between the global scope and the other 2 functions. 
+Both fn1 and fn2 can access the global scope, because fn1 sits on the global scope and fn2 sits within fn1, but the global scope cannot access the scope of either of the 2 functions.
 
-In other words scope access is only a one way process unless there is closure to allow access.
+In other words scope access is a one way process.
 
 ```
-  >>Closure>>
- ∧          v
 GS   <<<   fn1   <<<   fn2   <<<   fn3
       >/          >/          >/
 ```
    
-In this simple example, **fn3** can assess the scope of **fn2**, **fn2** can access the scope of **fn1** and **fn1** can access the scope of **GS** as illustrated by the (<<<) symbols, this also means that **fn3** can access the scope of **fn1** by flowing through the scope of **fn2** and it can also access the scope of **GS** by flowing through the socpe of **fn2** and then flowing through the scope of **fn1**, but it is not possible to go forwards from **GS** to **fn1** etc... as illustrated by the (>/) symbol.
+In this simple example, imagine that **fn3** sits in **fn2** which itself sits within **fn1** which sits within **GS**; In this case **fn3** can assess the scope of **fn2**, **fn2** can access the scope of **fn1** and **fn1** can access the scope of **GS** as illustrated by the (<<<) symbols, this also means that **fn3** can access the scope of **fn1** by flowing through the scope of **fn2** and it can also access the scope of **GS** by flowing through the socpe of **fn2** and then flowing through the scope of **fn1**, but it is not possible to go forwards from **GS** to **fn1** etc... as illustrated by the (>/) symbol.
 
-Also in this example we can see that **GS** has closure over **fn1** as illustrated by the (∧) (>>Closure>>) (v) aymbols, this means that **GS** can read the contents of **fn1**.
+If **fn3** is looking for a particular variable it will first look within its own scope, if it cannot find it within itself it will go up through the rest of the functions it sits within in order **fn2** then **fn1** etc... untill it finds the function it is looking for, at which point it will stop and use that function. 
 
+For example, if **fn3** is looing for a **var a** and there is a **var a** in both **fn2** and **fn3** because **fn3** will look in its onw socpe first, and if a **var a** is not found **fn3** will then move into the scope of **fn2**, and because **fn2** has a **var a** **fn3** will use this **var a** never needing to access the scope of **fn1** so the **var a** within **fn1** will never be used by **fn3**
+
+```js
+function fn1() {
+   var a = 3:
+   
+   function fn2() {
+   var a = 33;
+   
+      function fn3() {
+        console.log(a); // 33
+      }
+      
+   }
+   
+}
+   
+```
+As we can see in this example **fn3** did not have a **var a** inside its own scope, but the **fn3** was tasked with printing an **a** variable, so **fn3** had to jump up into the scope of **fn2** and us the **var a** contained within the scope of **fn2**, once that variable within the scope of **fn2** was found **fn3** stoped searching and used thet variable, so the **var a** within **fn1** was never reached by **fn3**.
