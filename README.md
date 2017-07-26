@@ -294,14 +294,23 @@ Both fn1 and fn2 can access the global scope, because fn1 sits on the global sco
 In other words scope access is only a one way process unless there is closure to allow access. We can think of Closure as a portal that allows access from a function or the global scope to another functions scope.
 
 ```
-  >>>>Closure>>>>>
- ∧                v
-GS < fn1 < fn2 < fn3
+  >>>>>>Closure>>>>>>>
+ ∧                   v
+GS << fn1 << fn2 << fn3
    >/    >/    >/
 ```
    
-In this simple example, **fn3** can assess **fn2**, **fn2** can access **fn1** and **fn1** can asscee **GS** as illustrated by the (<) symbol, this also means that **fn3** can access **fn1** by flowing through the scope of **fn2** and it can access **GS** by flowing through the socpe of **fn2** then flowing through the scope of **fn1**, but it is not possible to go forwards as illustrated by the (>/) symbol.
+In this simple example, **fn3** can assess the scope of **fn2**, **fn2** can access the scope of **fn1** and **fn1** can access the scope of **GS** as illustrated by the (<<) symbols, this also means that **fn3** can access the scope of **fn1** by flowing through the scope of **fn2** and it can also access the scope of **GS** by flowing through the socpe of **fn2** and then flowing through the scope of **fn1**, but it is not possible to go forwards from **GS** to **fn1** etc... as illustrated by the (>/) symbol.
 
-Also in this example we can see that **GS** has closure over **fn3** as illustrated by the (∧) (>>>>Closure>>>>>) (V) aymbols, as we can see it looks like a portal that skips over the functions **fn1**, **fn2** and accesses **fn3** directly,
+Also in this example we can see that **GS** has closure over **fn3** as illustrated by the (∧) (>>>>>>Closure>>>>>>>) (V) aymbols, as we can see it looks like a portal that skips over the functions **fn1**, **fn2** and accesses **fn3** directly, in this way, through closure **GS** can access the scopes of **fn3** directly and the scoped of **fn2** and **fn1** through the scope of **fn3** due to closure.
+
+If **GS** had closure over the scope of **fn2** then **GS** would be able to access the scope of **fn2**, and the scope of **fn1** but not the socpe of **fn3** because it would not be able to travel from **fn2** to **fn3** as illustrated in the following example:
+
+```
+  >>>Closure>>>
+ ∧            v
+GS << fn1 << fn2 << fn3
+   >/    >/    >/
+```
    
    
