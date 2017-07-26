@@ -297,7 +297,7 @@ In other words scope access is only a one way process unless there is closure to
   >>>>>>Closure>>>>>>>
  ∧                   v
 GS << fn1 << fn2 << fn3
-   >/    >/    >/
+   >/     >/     >/
 ```
    
 In this simple example, **fn3** can assess the scope of **fn2**, **fn2** can access the scope of **fn1** and **fn1** can access the scope of **GS** as illustrated by the (<<) symbols, this also means that **fn3** can access the scope of **fn1** by flowing through the scope of **fn2** and it can also access the scope of **GS** by flowing through the socpe of **fn2** and then flowing through the scope of **fn1**, but it is not possible to go forwards from **GS** to **fn1** etc... as illustrated by the (>/) symbol.
@@ -310,7 +310,7 @@ If **GS** had closure over the scope of **fn2** then **GS** would be able to acc
   >>>Closure>>>
  ∧            v
 GS << fn1 << fn2 << fn3
-   >/    >/    >/
+   >/     >/     >/
 ```
    
    
