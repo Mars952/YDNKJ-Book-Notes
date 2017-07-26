@@ -293,11 +293,12 @@ Both fn1 and fn2 can access the global scope, because fn1 sits on the global sco
 
 In other words scope access is only a one way process unless there is closure to allow access. We can think of Closure as a portal that allows access from a function or the global scope to another functions scope.
 
-
+```
   >>>>Closure>>>>>
  ∧                v
 GS < fn1 < fn2 < fn3
    >/    >/    >/
+```
    
 In this simple example, **fn3** can assess **fn2**, **fn2** can access **fn1** and **fn1** can asscee **GS** as illustrated by the (<) symbol, this also means that **fn3** can access **fn1** by flowing through the scope of **fn2** and it can access **GS** by flowing through the socpe of **fn2** then flowing through the scope of **fn1**, but it is not possible to go forwards as illustrated by the (>/) symbol.
 
