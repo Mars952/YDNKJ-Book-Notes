@@ -301,9 +301,9 @@ GS   <<<   fn1   <<<   fn2   <<<   fn3
    
 In this simple example, imagine that **fn3** sits in **fn2** which itself sits within **fn1** which sits within **GS**; In this case **fn3** can assess the scope of **fn2**, **fn2** can access the scope of **fn1** and **fn1** can access the scope of **GS** as illustrated by the (<<<) symbols, this also means that **fn3** can access the scope of **fn1** by flowing through the scope of **fn2** and it can also access the scope of **GS** by flowing through the socpe of **fn2** and then flowing through the scope of **fn1**, but it is not possible to go forwards from **GS** to **fn1** etc... as illustrated by the (>/) symbol.
 
-If **fn3** is looking for a particular variable it will first look within its own scope, if it cannot find it within itself it will go up through the rest of the functions it sits within in order **fn2** then **fn1** etc... untill it finds the function it is looking for, at which point it will stop and use that function. 
+If **fn3** is looking for a particular variable it will first look within its own scope, if it cannot find it within itself it will go up through the rest of the functions it sits within in order **fn2** then **fn1** etc... untill it finds the variable it is looking for, at which point it will stop and use that variable. 
 
-For example, if **fn3** is looing for a **var a** and there is a **var a** in both **fn2** and **fn3** because **fn3** will look in its onw socpe first, and if a **var a** is not found **fn3** will then move into the scope of **fn2**, and because **fn2** has a **var a** **fn3** will use this **var a** never needing to access the scope of **fn1** so the **var a** within **fn1** will never be used by **fn3**
+For example, if **fn3** is looing for a **var a** and there is a **var a** in both **fn2** and **fn1**, **fn3** will look in its own socpe first, if a **var a** is not found then **fn3** will move into the scope of **fn2**,  because **fn2** has a **var a** **fn3** will use this **var a** never needing to access the scope of **fn1** so the **var a** within **fn1** will never be used by **fn3**
 
 ```js
 function fn1() {
