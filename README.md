@@ -281,9 +281,9 @@ In JavaScript, scope is the set of variables, objects, and functions you have ac
 
 Javascript has function scope, meaning each function has its own scope. 
 
-The **global** scope is the scope that contains all your code.
+The **global scope** is the scope that contains all your code.
 
-In Javascript functions have private scope, meaning  functions, variables or objects cannot access the functions, variables or objects contained in another function if they are sitting int he same scope, unless there is **Closuer**, in the case of closure the closure provides access to the scope of a function from outside the function.
+In Javascript functions have private scope, meaning  functions, variables or objects cannot access the functions, variables or objects contained in another function if they are sitting in the same scope, unless there is **Closure**, in the case of closure the closure provides access to the scope of a function from outside the function.
 
 Example 1: If function 1 and function 2 both sit on the global scope, they cannot enter each others scope and read the containing functions, variables or objects, unless closure is present between the two functions.
 
@@ -291,26 +291,16 @@ Example 2: If function 2 (fn2) sits inside function 1 (fn1) then fn2 can access 
 
 Both fn1 and fn2 can access the global scope, because fn1 sits on the global scope and fn2 sits within fn1, but the global scope cannot access the scope of either of the 2 functions, unless there is closure between the global scope and the other 2 functions. 
 
-In other words scope access is only a one way process unless there is closure to allow access. We can think of Closure as a portal that allows access from a function or the global scope to another functions scope.
+In other words scope access is only a one way process unless there is closure to allow access.
 
 ```
-  >>>>>>Closure>>>>>>>
- ∧                   v
-GS << fn1 << fn2 << fn3
-   >/     >/     >/
-```
-   
-In this simple example, **fn3** can assess the scope of **fn2**, **fn2** can access the scope of **fn1** and **fn1** can access the scope of **GS** as illustrated by the (<<) symbols, this also means that **fn3** can access the scope of **fn1** by flowing through the scope of **fn2** and it can also access the scope of **GS** by flowing through the socpe of **fn2** and then flowing through the scope of **fn1**, but it is not possible to go forwards from **GS** to **fn1** etc... as illustrated by the (>/) symbol.
-
-Also in this example we can see that **GS** has closure over **fn3** as illustrated by the (∧) (>>>>>>Closure>>>>>>>) (V) aymbols, as we can see it looks like a portal that skips over the functions **fn1**, **fn2** and accesses **fn3** directly, in this way, through closure **GS** can access the scopes of **fn3** directly and the scoped of **fn2** and **fn1** through the scope of **fn3** due to closure.
-
-If **GS** had closure over the scope of **fn2** then **GS** would be able to access the scope of **fn2**, and the scope of **fn1** but not the socpe of **fn3** because it would not be able to travel from **fn2** to **fn3** as illustrated in the following example:
-
-```
-  >>>Closure>>>
- ∧            v
-GS << fn1 << fn2 << fn3
-   >/     >/     >/
+  >>Closure>>
+ ∧          v
+GS   <<<   fn1   <<<   fn2   <<<   fn3
+      >/          >/          >/
 ```
    
-   
+In this simple example, **fn3** can assess the scope of **fn2**, **fn2** can access the scope of **fn1** and **fn1** can access the scope of **GS** as illustrated by the (<<<) symbols, this also means that **fn3** can access the scope of **fn1** by flowing through the scope of **fn2** and it can also access the scope of **GS** by flowing through the socpe of **fn2** and then flowing through the scope of **fn1**, but it is not possible to go forwards from **GS** to **fn1** etc... as illustrated by the (>/) symbol.
+
+Also in this example we can see that **GS** has closure over **fn1** as illustrated by the (∧) (>>Closure>>) (v) aymbols, this means that **GS** can read the contents of **fn1**.
+
