@@ -322,3 +322,10 @@ function fn1() {
    
 ```
 As we can see in this example **fn3** did not have a **var a** inside its own scope, but the **fn3** was tasked with printing an **a** variable, so **fn3** had to jump up into the scope of **fn2** and us the **var a** contained within the scope of **fn2**, once that variable within the scope of **fn2** was found **fn3** stoped searching and used thet variable, so the **var a** within **fn1** was never reached by **fn3**.
+
+<br/>
+<br/>
+<br/>
+
+
+### Closure
