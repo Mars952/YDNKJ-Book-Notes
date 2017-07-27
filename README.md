@@ -278,6 +278,7 @@ More Info: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 
 ### Scope
 
+
 In JavaScript, scope is the set of variables, objects, and functions you have access to.
 
 Javascript has function scope, meaning each function has its own scope. 
@@ -325,7 +326,104 @@ As we can see in this example **fn3** did not have a **var a** inside its own sc
 
 <br/>
 <br/>
+
+### Lexical Scope
+
+**Lexical Scope** is the Scope model that Javascript Employs, as opposed to **Dynamic Scope** (Which is used by some other languages), **Lexical Scope** is determined when the code is compiled, i.e: lexical scope means that scope is defined by author-time decisions of where functions are declared.   
+
+<br/>
 <br/>
 
 
 ### Closure
+
+Closure is when a function is able to remember and access its lexical scope even when that function is executing outside its lexical scope.
+
+Consider the code below as an example of closure:
+
+```js
+function foo() {
+   var a = 2;
+   
+   function bar() {
+      console.log( a );
+   }
+   
+   return bar;
+}
+
+var baz = foo();
+
+baz(); // 2 -- Whoa, closure was just observed, man.
+
+```
+
+Function **foo();** is executed in the background as soon as it is passed to **var baz** as a value, (var baz = foo();)
+
+Even though **var baz** references **foo()** (var baz = foo();), when **baz();** is called it is not running **foo();** at all, what it is doing is going into **foo();** and running the **bar();** function which was declared inside **foo();** and returned by **foo();** (return bar;).
+
+So when we run **baz();** we can consider that it is the same as running **bar();** outside its enclosing / lexical scope.
+
+As we are not running **foo();** anymore and it had already executed, run and had returned, we would usually assume that the scope of **foo();** would be garbage collected like any normal function to free up memory, but this does not happen, the scope of **foo();** is still saved/retained in memory because the scope of **foo();** is still being used by the **bar();** function to reference the **var a** every time **bar();** it is called.
+
+This retention/memory of **bar();** is considered a closure. **bar();** still has reference to the scope of **foo();** and this reference is called a closure.
+
+Closure lets the function **bar();** continue to access the lexical scope (scope of foo();) it was defined in at author time.
+
+How do we know that calling **baz();** references **bar();** directly and does not run **foo();** first? 
+
+Consider the folowing example:
+
+```js
+function foo(b) {
+   var a = b;
+   
+   function bar() {
+      console.log( a );
+   }
+   
+   return bar;
+}
+
+var baz = foo(b);
+
+baz(3); // ReferenceError: Cant find variable b
+
+```
+
+if **baz();** was running **foo();** first and then running **bar();** we could assume that this code would have worked and changed the **console.log();** output to **3**, because from the looks of it **baz(3);** has an argument of **3** which we would assume would get passed over to the variable **b** of **foo(b);** eventually changing **a** to **b** within the function **foo();** (var a = b;).
+
+But that is not the case as we can see in the error **Cant find variable b**, so we can see that **baz();** does not reference **foo();** at all, it references **bar();** directly and calls it, as if we were calling **bar();** from outside the **foo();** scope.
+
+How can we really prove this? 
+
+Consider the folowing code:
+
+```js
+function foo() {
+   var a = 2;
+   
+   function bar(b) {
+      console.log( a + b );
+   }
+   
+   return bar;
+}
+
+var baz = foo();
+
+baz(3); // 5
+```
+
+As we can see this time the output is **5** because in the **console.log();** of **bar();** we had added together **var a** and **var b** (a + b). As **var a** was set to **2** in the scope of **foo();** and **var b** was set to **3** when we called **baz(3);** we ended up with a result of **5**.
+
+This shows us that **baz();** had referenced **bar();** directly and calling **baz(3);** was just like calling **bar(3);** directly, so the **var b** in **bar(b);** was directly set to **3** and then through closure **bar();** had referenced the scope of **foo();** and grabbed the **var a**.
+
+I mentioned calling **baz();** is like calling **bar();** directly, some people might ask, why not just call **bar();** directly then!?
+
+Well we cannot call **bar();** directly because you cannot call a function from outside of the scope it was declared in. 
+
+Why? 
+
+Because function scopes are private, so the only way to call **bar();** (or any function) from outside the scope it was declared in is to return it from the function it was declared in and asign it to another variable **(in this case baz();)** which will be called when we want to execute **bar();** from outside the scope it was declared in.
+
