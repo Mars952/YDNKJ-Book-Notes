@@ -427,3 +427,94 @@ Why?
 
 Because function scopes are private, so the only way to call **bar();** (or any function) from outside the scope it was declared in is to return it from the function it was declared in and asign it to another variable **(in this case baz();)** which will be called when we want to execute **bar();** from outside the scope it was declared in.
 
+<br/>
+<br/>
+
+
+### Loops + Closure
+
+Why does this output **6** and not **1, 2, 3, 4, 5**:
+
+```js
+for (var i=1; i<=5; i++) {
+setTimeout( function timer(){
+console.log( i );
+}, i*1000 );
+}
+//6
+//6
+//6
+//6
+//6
+//6
+```
+
+This outputs **6** because Javascript is single threaded, which means it runs one **thread/process** at a time stacking the others in a que, so when javascript runs it puts all its **functions/processes** in a que.
+
+In this example the **for loop** calls the **setTimeout**, so the **setTimeout** gets put in a que to run after the **for loop** has finished executing, as the **for loop** has been told to output code only while **var i** is less than **5** the loop will run untill **var i** becomes **6** at which point the loop will end, meaning **var i** will be set to **6**.
+
+After the **for loop** has run the **setTimeout** functions will start running, at this point all the **setTimeout** have closure over the for loop and the **var i** variable and all will output **6** as the **var i** had been set to **6** before the **setTimeout** had run.
+
+How to fix this:
+
+```js
+for (var i=1; i<=5; i++) {
+	let j = i; // yay, block-scope for closure!
+	setTimeout( function timer(){
+		console.log( j );
+	}, j*1000 );
+}
+```
+or
+
+```js
+for (let i=1; i<=5; i++) {
+	setTimeout( function timer(){
+		console.log( i );
+	}, i*1000 );
+}
+```
+
+Why does this work then?
+
+This works because the **let** decleration creates a new **block scope** every time the **for loop** loops, and as each **setTimeout** is defined within its own **block scope** it will only reference the **let** that was int he scope it was defined in, and **let** will be initialized at each subsequent iteration with the value from the end of the previous iteration.
+
+<br/>
+<br/>
+
+
+### Modules
+
+Modules are a code parrerns /design patterns in javascript which leverage the power of closure.
+
+Modules divide programs into clusters of code that, by some criterion, belong together.
+
+
+```js
+function CoolModule() {
+	var something = "cool";
+	var another = [1, 2, 3];
+
+	function doSomething() {
+		console.log( something );
+	}
+
+	function doAnother() {
+		console.log( another.join( " ! " ) );
+	}
+
+	return {
+		doSomething: doSomething,
+		doAnother: doAnother
+	};
+}
+
+var foo = CoolModule();
+
+foo.doSomething(); // cool
+foo.doAnother(); // 1 ! 2 ! 3
+```
+
+Learn More: Learn More: https://toddmotto.com/mastering-the-module-pattern/
+Learn More: https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc
+
