@@ -489,6 +489,7 @@ Modules are a code parrerns /design patterns in javascript which leverage the po
 
 Modules divide programs into clusters of code that, by some criterion, belong together.
 
+Example of a Module: 
 
 ```js
 function CoolModule() {
@@ -514,6 +515,8 @@ var foo = CoolModule();
 foo.doSomething(); // cool
 foo.doAnother(); // 1 ! 2 ! 3
 ```
+
+As we can see here Modules employ closure to function.
 
 Learn More: Learn More: https://toddmotto.com/mastering-the-module-pattern/
 Learn More: https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc
