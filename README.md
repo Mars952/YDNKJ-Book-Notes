@@ -634,5 +634,38 @@ var a = "oops, global"; // `a` also property on global object
 bar(); // "oops, global"
 ```
 
-From this example we can see that when calling `bar();` the **foo** function logs us the **a** from the global scope, instead of the one from the **var obj** object, it might seem strange as the `var bar = obj.foo;` is referencing **obj.foo;** but as we can see that in `var bar = obj.foo;` **foo** is not being called because it is missing the **()** brackets i.e `obj.foo();` as we saw in the previous examples, here instead the **var bar** is being set to **foo**, so when we do call `bar();` it is as if we are calling `foo();` dirextly fromt he global object, thus our this is now bound to the *global* object.
+From this example we can see that when calling `bar();` the **foo** function logs us the **a** from the global scope, instead of the one from the **var obj** object, it might seem strange as the `var bar = obj.foo;` is referencing **obj.foo;** but as we can see that in `var bar = obj.foo;` **foo** is not being called because it is missing the **()** brackets i.e `obj.foo();` as we saw in the previous examples, here instead **foo** is being set/asigned to the **var bar**, so when we do call `bar();` it is as if we are calling `foo();` directly from the global object, thus our this is now bound to the *global* object.
+
+This exact example is just an *example* but this is a common mistake that could happen, where you might assign a function to something instead of calling the function by accidentally missing the brackets `()` after the unction name; `foo;` vs `foo();`.
+
+The more common way this might happen is when we are working with callback functions wehere we are using functions as arguments:
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+function doFoo(fn) {
+	// `fn` is just another reference to `foo`
+
+	fn(); // <-- call-site!
+}
+
+var obj = {
+	a: 2,
+	foo: foo
+};
+
+var a = "oops, global"; // `a` also property on global object
+
+doFoo( obj.foo ); // "oops, global"
+```
+As we can see here, we are calling the **doFoo** function with the parameter of **obj.foo** `doFoo( obj.foo );`, what this does is asign the **obj.foo** as the *argument* **fn** on the **doFoo** function `function doFoo(fn)`, and the **obj.foo**, what happened here just like in the previous example where we asigned **obj.foo;** to **var bar** (`var bar = obj.foo;`) thus calling `bar();` became exactly like calling `foo();` directly, similarly when the fn(); is called it is just as if we are calling `foo();` within the **doFoo** function.
+
+This unbinds **foo's** `this` from the object and sets it to the *global* object because the closest **a** variable the **doFoo** function can reach is the one on the global scope that
+
+
+<br/>
+
+### Loosing the `this` Binding
 
