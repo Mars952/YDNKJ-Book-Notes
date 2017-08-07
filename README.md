@@ -533,3 +533,58 @@ Learn More: https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guid
 `this` is actually a binding that is made when a function is invoked, and *what* it references is determined entirely by the call-site where the function is called.
 
 More Info: https://github.com/gnovakov/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch2.md#call-site
+
+<br/>
+<br/>
+<br/>
+
+### Default Binding
+
+Default binding applies to where the function was called from, so in the following case `this` points to the global object:
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var a = 2;
+
+foo(); // 2
+```
+
+As we can see the **foo();** was called on the global object thus **foos** `this` is set to the global object.
+
+<br/>
+
+If we are using **strict mode**, the global object is not eligible for the default binding:
+
+```js
+"use strict";
+function foo() {
+	console.log( this.a );
+}
+
+var a = 2;
+
+foo(); // TypeError: `this` is `undefined`
+```
+<br/>
+
+### Implicit Binding
+
+Does the call site have a contect object, is the function you are calling located within an object:
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var obj = {
+	a: 2,
+	foo: foo
+};
+
+obj.foo(); // 2
+```
+As we can see here, we are calling **foo** on the global object, but foo is actually located inside the **var obj** object, so **obj.foo();** is just a reference to the **foo** within the **var obj** so theoretically **foo** is being called from the object, thus *binding* the `this` of **foo** to **var obj** which is why `console.log( this.a );` returns **2**, because **a** is located within **var obj**.
+
