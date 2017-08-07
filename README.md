@@ -610,9 +610,29 @@ obj1.obj2.foo(); // 42
 
 As we can see in this example, the `this` of **foo** is *bound* to the **var obj2** object, because that is where the **foo** is immediately bound to `var obj2 = { a: 42, foo: foo };`, and the fact that we are calling **foo** through **obj1** and then **obj2** (`obj1.obj2.foo();`) doesnt matter because these are references to the **foo** within the **var obj1** thus `console.log( this.a );` logs **42**, because the **a** variable where **foo's** `this` is located is *42*.
 
-It might look like `foo()` is being called from the global object, but what `obj1.obj2.foo();` does in theory is it says *OK, go into **obj1** and find **obj2** once you have found **obj2** go into it and find **foo**, once you have found **foo** call foo `foo()`.
+It might look like `foo()` is being called from the global object, but what `obj1.obj2.foo();` does in theory is it says *OK, go into **obj1** and find **obj2** once you have found **obj2** go into it and find **foo**, once you have found **foo** call foo `foo()`.*
 
 <br/>
 
-### Explicit Binding
+### Loosing the `this` Binding
+
+Depending how `foo();` is called it might result int he `this` binding being lost, consider the following example:
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var obj = {
+	a: 2,
+	foo: foo
+};
+
+var bar = obj.foo; // function reference/alias!
+
+var a = "oops, global"; // `a` also property on global object
+
+bar(); // "oops, global"
+```
+
+From this example we can see that when calling `bar();` the **foo** function logs us the **a** from the global scope, instead of the one from the **var obj** object, it might seem strange as the `var bar = obj.foo;` is referencing **obj.foo;** but as we can see that in `var bar = obj.foo;` **foo** is not being called because it is missing the **()** brackets i.e `obj.foo();` as we saw in the previous examples, here instead the **var bar** is being set to **foo**, so when we do call `bar();` it is as if we are calling `foo();` dirextly fromt he global object, thus our this is now bound to the *global* object.
 
