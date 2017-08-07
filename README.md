@@ -586,5 +586,29 @@ var obj = {
 
 obj.foo(); // 2
 ```
-As we can see here, we are calling **foo** on the global object, but foo is actually located inside the **var obj** object, so **obj.foo();** is just a reference to the **foo** within the **var obj** so theoretically **foo** is being called from the object, thus *binding* the `this` of **foo** to **var obj** which is why `console.log( this.a );` returns **2**, because **a** is located within **var obj**.
+As we can see here, we are calling **foo** on the global object, but foo is actually located inside the **var obj** object, so **obj.foo();** is just a reference to the **foo** within the **var obj** so theoretically **foo** is being called from the object, thus *binding* the `this` of **foo** to **var obj** which is why `console.log( this.a );` logs **2**, because **a** is located within **var obj**.
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var obj2 = {
+	a: 42,
+	foo: foo
+};
+
+var obj1 = {
+	a: 2,
+	obj2: obj2
+};
+
+obj1.obj2.foo(); // 42
+```
+
+As we can see in this example, the `this` of **foo** is *bound* to the **var obj2** object, because that is where the **foo** is defined, and the fact that we are calling **foo** through **obj1** and then **obj2** (`obj1.obj2.foo();`) these are references to the actual location of **foo** thus `console.log( this.a );` logs **42**, because the **a** variable where **foo's** `this` is located is *42*.
+
+<br/>
+
+### Explicit Binding
 
