@@ -521,3 +521,13 @@ As we can see here Modules employ closure to function.
 Learn More: Learn More: https://toddmotto.com/mastering-the-module-pattern/
 Learn More: https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc
 
+<br/>
+<br/>
+<br/>
+
+
+# Book: this & Object Prototypes
+
+### This
+
+`this` is actually a binding that is made when a function is invoked, and *what* it references is determined entirely by the call-site where the function is called.
