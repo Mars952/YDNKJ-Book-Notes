@@ -610,6 +610,8 @@ obj1.obj2.foo(); // 42
 
 As we can see in this example, the `this` of **foo** is *bound* to the **var obj2** object, because that is where the **foo** is immediately bound to `var obj2 = { a: 42, foo: foo };`, and the fact that we are calling **foo** through **obj1** and then **obj2** (`obj1.obj2.foo();`) doesnt matter because these are references to the **foo** within the **var obj1** thus `console.log( this.a );` logs **42**, because the **a** variable where **foo's** `this` is located is *42*.
 
+It might look like `foo()` is being called from the global object, but what `obj1.obj2.foo();` does in theory is it says *OK, go into **obj1** and find **obj2** once you have found **obj2** go into it and find **foo**, once you have found **foo** call foo `foo()`.
+
 <br/>
 
 ### Explicit Binding
