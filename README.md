@@ -680,4 +680,26 @@ Previously we looked at ***implicit*** binding which means *suggested though not
 
 So the diference is with *implicit* we had to be carefull where the `this` was being specified and bound to, while with *explicit* we specify directly where we want the `this` to be specified and bound.
 
+Consider this example:
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var obj = {
+	a: 2
+};
+
+foo.call( obj ); // 2
+```
+
+Here we are not asigning **foo** to the **obj** object, as we did in the previous examples, so if we wanted to bind the `this` of **foo** to **obj** we could not do it by calling `obj.foo()` because there is no **foo** within the **obj**, in this case to bing the `this` of **foo** to the **obj** we would use the `call();` method and pass the **obj** to the `call();` ( `foo.call(obj);` ) which will **explicitly** bind the `this` of **foo** to the **obj** object, thus outputting the **a** variable of the **obj** object.
+
+So here we are not calling foo, but we are calling the **call();** method that belongs to **foo** and we are passing it the **obj** as an argument, the call method then executes **foo** and binds **foos** `this` to **obj** thus allowing us to access the **a** variable of **obj**.
+
+We can see why it is called ***explicit*** because we are directly choosing what we want to bind the `this` of **foo** to.
+
+
+
 
