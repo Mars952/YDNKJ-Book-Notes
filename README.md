@@ -698,7 +698,9 @@ Here we are not asigning **foo** to the **obj** object, as we did in the previou
 
 So here we are not calling foo, but we are calling the **call();** method that belongs to **foo** and we are passing it the **obj** as an argument, the call method then executes **foo** and binds **foos** `this` to **obj** thus allowing us to access the **a** variable of **obj**.
 
-We can see why it is called ***explicit*** because we are directly choosing what we want to bind the `this` of **foo** to.
+We can see why it is called ***explicit*** because we are directly choosing what we want to bind the `this` of **foo** to, because we are making the choice ourselves.
+
+
 
 
 
