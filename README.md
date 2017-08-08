@@ -552,7 +552,7 @@ var a = 2;
 foo(); // 2
 ```
 
-As we can see the **foo();** was called on the global object thus **foos** `this` is set to the global object.
+As we can see the **foo();** was called on the global object thus **foo's** `this` is set to the global object.
 
 <br/>
 
@@ -569,10 +569,11 @@ var a = 2;
 foo(); // TypeError: `this` is `undefined`
 ```
 <br/>
+<br/>
 
 ### Implicit Binding
 
-Does the call site have a contect object, is the function you are calling located within an object:
+Does the call-site have a context object, is the function call located within an object:
 
 ```js
 function foo() {
@@ -586,9 +587,11 @@ var obj = {
 
 obj.foo(); // 2
 ```
-As we can see here, it looks like we are calling **foo** on the global object through `obj.foo();`, but because `foo()` is located inside the **var obj** object, what we are doing is calling `foo()` through the **var obj** object, (i.e. accessing *obj* and calling `foo();`) so `obj.foo();` is just a reference to the **foo** within the **var obj** so theoretically `foo()` is being called from within the **var obj** object, thus *binding* the `this` of **foo** to **var obj** which is why `console.log( this.a );` logs **2**, because **a** is located within **var obj**.
+As we can see here, it looks like we are calling **foo** on the global object through `obj.foo();`, but because `foo()` is located inside the **var obj** object, what we are actually doing is calling `foo()` through the **var obj** object, (i.e. accessing *obj* and calling `foo();`) so `obj.foo();` is just a reference to the **foo** within the **var obj** so theoretically `foo()` is being called from within the **var obj** object, thus *binding* the `this` of **foo** to **var obj** which is why `console.log( this.a );` logs **2**, because **a** is located within **var obj**.
 
 <br/>
+
+Consider this: 
 
 ```js
 function foo() {
@@ -613,10 +616,11 @@ As we can see in this example, the `this` of **foo** is *bound* to the **var obj
 It might look like `foo()` is being called from the global object, but what `obj1.obj2.foo();` does in theory is it says *OK, go into **obj1** and find **obj2** once you have found **obj2** go into it and find **foo**, once you have found **foo** call foo `foo()`.*
 
 <br/>
+<br/>
 
 ### Loosing the `this` Binding
 
-Depending how `foo();` is called it might result int he `this` binding being lost, consider the following example:
+Depending how `foo();` is called it might result in the `this` binding being lost, consider the following example:
 ```js
 function foo() {
 	console.log( this.a );
@@ -634,11 +638,11 @@ var a = "oops, global"; // `a` also property on global object
 bar(); // "oops, global"
 ```
 
-From this example we can see that when calling `bar();` the **foo** function logs us the **a** from the global scope, instead of the one from the **var obj** object, it might seem strange as the `var bar = obj.foo;` is referencing **obj.foo;** but as we can see that in `var bar = obj.foo;` **foo** is not being called because it is missing the **()** brackets i.e `obj.foo();` as we saw in the previous examples, here instead **foo** is being set/asigned to the **var bar**, so when we do call `bar();` it is as if we are calling `foo();` directly from the global object, thus our this is now bound to the *global* object.
+From this example we can see that when calling `bar();` the **foo** function logs us the **a** *"oops, global"* from the *global* scope, instead of the one from the **var obj** object scope, it might seem strange as the `var bar = obj.foo;` is referencing **obj.foo;** but as we can see that in `var bar = obj.foo;` **foo** is not being called, and we know this because it is missing the **()** brackets i.e `obj.foo();`. Instead **foo** is being asigned to the **var bar** `var bar = obj.foo;`, so when we do call `bar();` it is as if we are calling `foo();` directly from the *global* object, thus our `this` is now bound to the *global* object.
 
-This exact example is just an *example* but this is a common mistake that could happen, where you might assign a function to something instead of calling the function by accidentally missing the brackets `()` after the unction name; `foo;` vs `foo();`.
+This exact example is just that an *example* but this is a common mistake that could happen, where you might assign a function to something instead of calling the function by accidentally forgetting the brackets `()` after the function fname; `foo;` vs `foo();`.
 
-The more common way this might happen is when we are working with callback functions wehere we are using functions as arguments:
+The more common way this might happen is when we are working with callback functions (wehere we are using functions as arguments):
 
 ```js
 function foo() {
@@ -660,12 +664,13 @@ var a = "oops, global"; // `a` also property on global object
 
 doFoo( obj.foo ); // "oops, global"
 ```
-As we can see here, we are calling the **doFoo** function with the parameter of **obj.foo** `doFoo( obj.foo );`, what this does is asign the **obj.foo** as the *argument* **fn** on the **doFoo** function `function doFoo(fn)`, and the **obj.foo**, what happened here just like in the previous example where we asigned **obj.foo;** to **var bar** (`var bar = obj.foo;`) thus calling `bar();` became exactly like calling `foo();` directly, similarly when the fn(); is called it is just as if we are calling `foo();` within the **doFoo** function.
+As we can see here, we are calling the **doFoo** function with the parameter of **obj.foo** `doFoo( obj.foo );`, what this does is asign the **obj.foo** to to the *argument* **fn** on the **doFoo** function `function doFoo(fn)`, so that **fn** becomed **foo**, just like in the previous example where we asigned **obj.foo;** to **var bar** (`var bar = obj.foo;`) thus calling `bar();` became exactly like calling `foo();` directly, similarly here when the `fn();` is called it is just as if we are calling `foo();` within the **doFoo** function.
 
-This unbinds **foo's** `this` from the object and sets it to the *global* object because the closest **a** variable the **doFoo** function can reach is the one on the global scope that
-
+This unbinds **foo's** `this` from the object and sets it to the *global* object because the `foo();` is being called within the **doFoo** function, and the closest **a** variable to the **doFoo** function is on the *global* scope.
 
 <br/>
+<br/>
 
-### Loosing the `this` Binding
+### Explicit Binding
+
 
