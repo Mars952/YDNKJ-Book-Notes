@@ -730,8 +730,58 @@ bar.call( window ); // 2
 
 As we can see here, the **bar** function contains the binding of **foo's** `this` and **obj** ( `foo.call( obj );` ), so whenever we can `bar();` we will always automatically hard bind the `this` of **foo** to **obj**. No matter how you later invoke the function bar, it will always manually invoke foo with obj.
 
-A more usable way of creating **hard bindings** would be 
+***Variations:***
+```js
+function foo(something) {
+	console.log( this.a, something );
+	return this.a + something;
+}
 
+var obj = {
+	a: 2
+};
+
+var bar = function() {
+	return foo.apply( obj, arguments );
+};
+
+var b = bar( 3 ); // 2 3
+console.log( b ); // 5
+bar(4);// 2 4
+       //6
+```
+Here we are also binding the `this` of **foo** with the **obj** within the **bar** function like in the previous example, but we are allowing for extra arguments to be thrown in, in this case calling `bar(4);` is like we are calling `foo(4)` which outputs for us the **a** variable ( *2* ) from the **obj** where the `this` of **foo** is bound, and the ***something*** argument which we set to **4** when we called `foo(4);` and also returns to us the sum of the **a** variable and the **something** argument (`return this.a + something;`).
+
+Another way to express this pattern is to create a reusable helper where the object we want to bind the `this` to is not ***explicitly*** set as in the previous example ( `var bar = function() { return foo.apply( obj, arguments ); };` > *explicitly* and unchangeably set to **obj** also *explicitly* and unchangeably set to **foo** ), but can be set as the **bar** function is called to whatever we want incase we want to set the `this` to different functions or reuse the helper for different objects and functions:
+
+function foo(something) {
+	console.log( this.a, something );
+	return this.a + something;
+}
+
+// simple `bind` helper
+function bind(fn, obj) {
+	return function() {
+		return fn.apply( obj, arguments );
+	};
+}
+
+var obj1 = {
+	a: 2
+};
+
+var obj2 = {
+	a: 44
+};
+
+var bar1 = bind( foo, obj1 );
+var bar2 = bind( foo, obj2 );
+
+var b = bar1( 3 ); // 2 3
+console.log( b ); // 5
+
+var c = bar2( 3 ); // 44 3
+console.log( c ); // 47
 
 
 
