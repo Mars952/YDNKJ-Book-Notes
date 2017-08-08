@@ -754,6 +754,7 @@ Here we are also binding the `this` of **foo** with the **obj** within the **bar
 
 Another way to express this pattern is to create a reusable helper where the object we want to bind the `this` to is not ***explicitly*** set as in the previous example ( `var bar = function() { return foo.apply( obj, arguments ); };` > *explicitly* and unchangeably set to **obj** also *explicitly* and unchangeably set to **foo** ), but can be set as the **bar** function is called to whatever we want incase we want to set the `this` to different functions or reuse the helper for different objects and functions:
 
+```js
 function foo(something) {
 	console.log( this.a, something );
 	return this.a + something;
@@ -777,11 +778,13 @@ var obj2 = {
 var bar1 = bind( foo, obj1 );
 var bar2 = bind( foo, obj2 );
 
-var b = bar1( 3 ); // 2 3
+var b = bar1( 3 ); // 2 3 
 console.log( b ); // 5
 
 var c = bar2( 3 ); // 44 3
 console.log( c ); // 47
+```
+As we can see here we can reuse the **bind** functrion as a reusable function where we can bind any other functions `this` to any object we want, thus needing to only write the **bind** function once and reuse it multiple times, instead of wriging a new function for every new binding we want to create.
 
 
 
