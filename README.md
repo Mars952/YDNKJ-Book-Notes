@@ -188,7 +188,7 @@ An example of a callback function:
 
 ```js
 var cars = ["Toyota", "BMW", "Porsche", "Ferari", "Mini", "Ford"];
-​
+
 cars.forEach(function (car, index){
 console.log(index + 1 + ". " + car); // 1. Toyota, 2. BMW, 3. Porsche, 4. Ferari, 5.Mini, 6.Ford
 });
@@ -700,7 +700,37 @@ So here we are not calling foo, but we are calling the **call();** method that b
 
 We can see why it is called ***explicit*** because we are directly choosing what we want to bind the `this` of **foo** to, because we are making the choice ourselves.
 
+<br/>
+<br/>
 
+### Hard Binding
+
+Unfortunately explicit binding alone does not solve for functions losing its intended `this` binding, but the following variation does:
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var obj = {
+	a: 2
+};
+
+var bar = function() {
+	foo.call( obj );
+};
+
+bar(); // 2
+setTimeout( bar, 100 ); // 2
+
+// `bar` hard binds `foo`'s `this` to `obj`
+// so that it cannot be overriden
+bar.call( window ); // 2
+```
+
+As we can see here, the **bar** function contains the binding of **foo's** `this` and **obj** ( `foo.call( obj );` ), so whenever we can `bar();` we will always automatically hard bind the `this` of **foo** to **obj**. No matter how you later invoke the function bar, it will always manually invoke foo with obj.
+
+A more usable way of creating **hard bindings** would be 
 
 
 
