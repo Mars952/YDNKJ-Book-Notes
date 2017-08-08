@@ -613,7 +613,7 @@ obj1.obj2.foo(); // 42
 
 As we can see in this example, the `this` of **foo** is *bound* to the **var obj2** object, because that is where the **foo** is immediately bound to `var obj2 = { a: 42, foo: foo };`, and the fact that we are calling **foo** through **obj1** and then **obj2** (`obj1.obj2.foo();`) doesnt matter because these are references to the **foo** within the **var obj1** thus `console.log( this.a );` logs **42**, because the **a** variable where **foo's** `this` is located is *42*.
 
-It might look like `foo()` is being called from the global object, but what `obj1.obj2.foo();` does in theory is it says *OK, go into **obj1** and find **obj2** once you have found **obj2** go into it and find **foo**, once you have found **foo** call foo `foo()`.*
+It might look like `foo()` is being called from the global object, but what `obj1.obj2.foo();` does in theory is it says *OK, go into **obj1** and find **obj2** once you have found **obj2** go into it and find **foo**, once you have found **foo** call foo `foo()`. So `foo();` is called from within **obj2** thus the `this` is bound to **obj2**.
 
 <br/>
 <br/>
@@ -667,6 +667,9 @@ doFoo( obj.foo ); // "oops, global"
 As we can see here, we are calling the **doFoo** function with the parameter of **obj.foo** `doFoo( obj.foo );`, what this does is asign the **obj.foo** to to the *argument* **fn** on the **doFoo** function `function doFoo(fn)`, so that **fn** becomed **foo**, just like in the previous example where we asigned **obj.foo;** to **var bar** (`var bar = obj.foo;`) thus calling `bar();` became exactly like calling `foo();` directly, similarly here when the `fn();` is called it is just as if we are calling `foo();` within the **doFoo** function.
 
 This unbinds **foo's** `this` from the object and sets it to the *global* object because the `foo();` is being called within the **doFoo** function, and the closest **a** variable to the **doFoo** function is on the *global* scope.
+
+**Solution**
+So if we were writing the above code with the purpose to still call the **a** variable that is located within the **obj** object and keep **foo's** `this` bound to **obj**, we would not pass **obj.foo** to the **doFoo** function, instead we would just pass the **obj** by itself (`dofoo(obj);`), which would asign the  **obj** to the **fn** instead of the **foo**, and then to call the **foo** from within the **dooFoo** function we would call `fn.foo()` (`function doFoo(fn) { fn.foo(); }`), which would output the **a** from **obj** and not the *global* scope, because as we explained **fn** would be set to **obj**.
 
 <br/>
 <br/>
