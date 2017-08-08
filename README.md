@@ -676,4 +676,8 @@ So if we were writing the above code with the purpose to still call the **a** va
 
 ### Explicit Binding
 
+Previously we looked at ***implicit*** binding which means *suggested though not directly expressed*, but here we will talk about ***explicit*** binding which means *stated clearly and in detail, leaving no room for confusion or doubt.* and we call it **explicit** because functions have `call();` and `apply()` methods that allow you to *explicitly* specify where `this` will be bound.
+
+So the diference is with *implicit* we had to be carefull where the `this` was being specified and bound to, while with *explicit* we specify directly where we want the `this` to be specified and bound.
+
 
