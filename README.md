@@ -787,4 +787,49 @@ console.log( c ); // 47
 As we can see here we can reuse the **bind** functrion as a reusable function where we can bind any other functions `this` to any object we want, thus needing to only write the **bind** function once and reuse it multiple times, instead of wriging a new function for every new binding we want to create.
 
 
+<br/>
+<br/>
+
+### The `bind();` method
+
+Since hard binding is such a common pattern, the `bind();` method was provided in ES5 to make it easier to use:
+
+```js
+function foo(something) {
+	console.log( this.a, something );
+	return this.a + something;
+}
+
+var obj1 = {
+	a: 2
+};
+
+var obj2 = {
+	a: 44
+};
+
+var bar = foo.bind( obj1 );
+var baz = foo.bind( obj2 );
+
+var b = bar( 3 ); // 2 3
+console.log( b ); // 5
+var c = baz( 8 ); // 44 8
+console.log( c ); // 52
+```
+
+As we can see here, instead of writing out the long bind helper function:
+
+```js
+function bind(fn, obj) {
+	return function() {
+		return fn.apply( obj, arguments );
+	};
+}
+```
+and then :
+```js
+var bar1 = bind( foo, obj1 );
+```
+to make the bind, we were able to just use the new built in `bind();` methodthat did the whole job for us ```var bar = foo.bind( obj1 );```
+
 
