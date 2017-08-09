@@ -832,4 +832,23 @@ var bar1 = bind( foo, obj1 );
 ```
 to make the bind, we were able to just use the new built in `bind();` methodthat did the whole job for us ```var bar = foo.bind( obj1 );```
 
+<br/>
+<br/>
+
+### `new` binding
+
+If we create a *object type* that we want to use in the future, the `this` of any object we create from said *object type* by invoking the `new` keyword will be bound to the new object that was created, example:
+
+```js
+function foo(a) {
+	this.a = a;
+}
+
+var bar = new foo( 2 );
+console.log( bar.a ); // 2
+
+var baz = new foo( 88 );
+console.log( baz.a ); // 88
+```
+As we can see, we created two objects from the **foo** object type, ***bar*** and ***baz*** and as we can also see the `this` for each of these objects was set to the object itself, so when calling `bar.a` or `baz.a` the `this` binding is set to **bar** and **baz** respectively.
 
